@@ -1,0 +1,168 @@
+2025-08-19T22:51:25.025Z | POST /api/products | Product validation failed: category: Cast to ObjectId failed for value "{{categoryId}}" (type string) at path "category" because of "BSONError" | ValidationError: Product validation failed: category: Cast to ObjectId failed for value "{{categoryId}}" (type string) at path "category" because of "BSONError"
+    at Document.invalidate (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\document.js:3358:32)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\document.js:1480:12)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\document.js:1132:16)
+    at model.Document (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\document.js:178:12)
+    at model.Model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\model.js:127:12)
+    at new model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\model.js:4834:15)
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\model.js:2775:20
+    at Array.map (<anonymous>)
+    at Function.create (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\model.js:2763:34)
+    at createProduct (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/productController.js:69:38)
+2025-08-19T23:05:20.350Z | POST /api/cart/add-product | next is not defined | ReferenceError: next is not defined
+    at addProductToCart (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:150:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-20T19:02:51.215Z | GET /api/cart/add-product | Cast to ObjectId failed for value "add-product" (type string) at path "_id" for model "Cart" | CastError: Cast to ObjectId failed for value "add-product" (type string) at path "_id" for model "Cart"
+    at SchemaObjectId.cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schema\objectId.js:251:11)
+    at SchemaType.applySetters (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schemaType.js:1258:12)
+    at SchemaType.castForQuery (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schemaType.js:1682:17)
+    at cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\cast.js:390:32)
+    at Query.cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:5060:12)
+    at Query._castConditions (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:2374:10)
+    at model.Query._findOne (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:2697:8)
+    at model.Query.exec (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:4627:80)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async getCartById (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:14:18)
+2025-08-20T19:14:39.894Z | GET /api/cart/add-product | Cast to ObjectId failed for value "add-product" (type string) at path "_id" for model "Cart" | CastError: Cast to ObjectId failed for value "add-product" (type string) at path "_id" for model "Cart"
+    at SchemaObjectId.cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schema\objectId.js:251:11)
+    at SchemaType.applySetters (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schemaType.js:1258:12)
+    at SchemaType.castForQuery (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schemaType.js:1682:17)
+    at cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\cast.js:390:32)
+    at Query.cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:5060:12)
+    at Query._castConditions (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:2374:10)
+    at model.Query._findOne (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:2697:8)
+    at model.Query.exec (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:4627:80)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async getCartById (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:14:18)
+2025-08-22T23:29:07.440Z | POST /api/cart/add-product | mongoose is not defined | ReferenceError: mongoose is not defined
+    at isObjectId (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:3:52)
+    at addProductToCart (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:113:20)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\route.js:157:13)
+    at file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:15:5
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:261:12
+    at getSecret (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:101:10)
+    at authMiddleware (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:10:7)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+2025-08-23T01:16:35.322Z | PUT /api/products/68a65e60fb32d85a2f676399 | Unexpected non-whitespace character after JSON at position 759 (line 19 column 10) | SyntaxError: Unexpected non-whitespace character after JSON at position 759 (line 19 column 10)
+    at JSON.parse (<anonymous>)
+    at parse (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\body-parser\lib\types\json.js:77:19)
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\body-parser\lib\read.js:123:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:211:14)
+    at invokeCallback (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\raw-body\index.js:238:16)
+    at done (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:524:28)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-23T01:18:49.363Z | GET /api/cart/add-product | Cast to ObjectId failed for value "add-product" (type string) at path "_id" for model "Cart" | CastError: Cast to ObjectId failed for value "add-product" (type string) at path "_id" for model "Cart"
+    at SchemaObjectId.cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schema\objectId.js:251:11)
+    at SchemaType.applySetters (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schemaType.js:1258:12)
+    at SchemaType.castForQuery (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schemaType.js:1682:17)
+    at cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\cast.js:390:32)
+    at Query.cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:5060:12)
+    at Query._castConditions (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:2374:10)
+    at model.Query._findOne (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:2697:8)
+    at model.Query.exec (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:4627:80)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async getCartById (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:15:18)
+2025-08-23T01:19:35.535Z | POST /api/cart/add-product | mongoose is not defined | ReferenceError: mongoose is not defined
+    at isObjectId (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:3:52)
+    at addProductToCart (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:113:20)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\route.js:157:13)
+    at file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:15:5
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:261:12
+    at getSecret (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:101:10)
+    at authMiddleware (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:10:7)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+2025-08-23T01:20:46.554Z | POST /api/cart/add-product | mongoose is not defined | ReferenceError: mongoose is not defined
+    at isObjectId (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:3:52)
+    at addProductToCart (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:113:20)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\route.js:157:13)
+    at file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:15:5
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:261:12
+    at getSecret (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:101:10)
+    at authMiddleware (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:10:7)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+2025-08-23T01:22:31.836Z | GET /api/cart/add-product | Cast to ObjectId failed for value "add-product" (type string) at path "_id" for model "Cart" | CastError: Cast to ObjectId failed for value "add-product" (type string) at path "_id" for model "Cart"
+    at SchemaObjectId.cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schema\objectId.js:251:11)
+    at SchemaType.applySetters (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schemaType.js:1258:12)
+    at SchemaType.castForQuery (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\schemaType.js:1682:17)
+    at cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\cast.js:390:32)
+    at Query.cast (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:5060:12)
+    at Query._castConditions (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:2374:10)
+    at model.Query._findOne (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:2697:8)
+    at model.Query.exec (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\mongoose\lib\query.js:4627:80)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async getCartById (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:15:18)
+2025-08-23T01:26:40.380Z | POST /api/cart/add-product | mongoose is not defined | ReferenceError: mongoose is not defined
+    at isObjectId (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:3:52)
+    at addProductToCart (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:113:20)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\route.js:157:13)
+    at file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:15:5
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:261:12
+    at getSecret (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:101:10)
+    at authMiddleware (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:10:7)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+2025-08-23T01:26:42.317Z | POST /api/cart/add-product | mongoose is not defined | ReferenceError: mongoose is not defined
+    at isObjectId (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:3:52)
+    at addProductToCart (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:113:20)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\route.js:157:13)
+    at file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:15:5
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:261:12
+    at getSecret (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:101:10)
+    at authMiddleware (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:10:7)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+2025-08-23T01:27:14.644Z | POST /api/cart/add-product | mongoose is not defined | ReferenceError: mongoose is not defined
+    at isObjectId (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:3:52)
+    at addProductToCart (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:113:20)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\route.js:157:13)
+    at file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:15:5
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:261:12
+    at getSecret (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:101:10)
+    at authMiddleware (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:10:7)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+2025-08-23T01:27:27.940Z | POST /api/cart/add-product | mongoose is not defined | ReferenceError: mongoose is not defined
+    at isObjectId (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:3:52)
+    at addProductToCart (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:113:20)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\route.js:157:13)
+    at file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:15:5
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:261:12
+    at getSecret (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:101:10)
+    at authMiddleware (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:10:7)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+2025-08-23T01:27:48.301Z | POST /api/cart/add-product | mongoose is not defined | ReferenceError: mongoose is not defined
+    at isObjectId (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:3:52)
+    at addProductToCart (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:113:20)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\route.js:157:13)
+    at file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:15:5
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:261:12
+    at getSecret (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:101:10)
+    at authMiddleware (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:10:7)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+2025-08-23T01:31:13.527Z | POST /api/cart/add-product | mongoose is not defined | ReferenceError: mongoose is not defined
+    at isObjectId (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:3:52)
+    at addProductToCart (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/controllers/cartController.js:113:20)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+    at next (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\route.js:157:13)
+    at file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:15:5
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:261:12
+    at getSecret (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:97:14)
+    at module.exports [as verify] (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:101:10)
+    at authMiddleware (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:10:7)
+    at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
