@@ -1,0 +1,115 @@
+<div
+  class="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+>
+  <div class="max-w-md w-full space-y-8">
+    <form
+      (ngSubmit)="handleSubmit()"
+      [formGroup]="registerForm"
+      class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 space-y-6"
+    >
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-gray-900">Crear Cuenta</h2>
+        <p class="mt-2 text-sm text-gray-600">Únete a nuestra comunidad</p>
+      </div>
+
+      <div class="space-y-5"></div>
+
+      @for (field of fields; track $index) {
+      <app-form-field
+        [label]="field.label"
+        [fieldId]="field.fieldId"
+        [type]="field.type"
+        [placeholder]="field.placeholder"
+        [required]="field.required"
+        [errorMessage]="getErrorMessage(field.fieldId)"
+        [formControlName]="field.fieldId"
+      ></app-form-field>
+      }
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-3">
+          Foto de perfil (opcional)
+        </label>
+        <div class="relative">
+          <input
+            formControlName="avatar"
+            type="file"
+            (change)="onImageSelect($event)"
+            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+            accept="image/*"
+          />
+          <div
+            class="border-2 border-dashed border-gray-200 rounded-xl p-8 text-center hover:border-blue-300 hover:bg-blue-50/50 transition-all duration-200"
+          >
+            @if (imagePreview) {
+            <img
+              [src]="imagePreview"
+              alt="preview"
+              class="w-24 h-24 object-cover rounded-full mx-auto mb-3 border-4 border-white shadow-lg"
+            />
+            <p class="text-sm font-medium text-gray-700">
+              Clic para cambiar imagen
+            </p>
+            } @else {
+            <div
+              class="w-16 h-16 mx-auto mb-3 bg-gray-100 rounded-full flex items-center justify-center"
+            >
+              <svg
+                class="w-8 h-8 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
+              </svg>
+            </div>
+            <p class="text-sm font-medium text-gray-700">
+              Agregar foto de perfil
+            </p>
+            <p class="text-xs text-gray-500 mt-1">PNG, JPG hasta 5MB</p>
+            }
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="!registerForm.valid"
+        class="w-full bg-blue-600 text-white py-3.5 px-6 rounded-xl font-semibold text-base hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all duration-200 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-200"
+      >
+        <span class="flex items-center justify-center gap-2">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            />
+          </svg>
+          Crear cuenta
+        </span>
+      </button>
+
+      <div class="text-center pt-4">
+        <p class="text-sm text-gray-500">
+          ¿Ya tienes cuenta?
+          <a
+            class="font-medium text-blue-600 hover:text-blue-700 transition-colors"
+          >
+            Inicia sesión
+          </a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>

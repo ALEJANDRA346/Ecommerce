@@ -1,0 +1,93 @@
+<div class="bg-white shadow rounded-lg p-6">
+  <h2 class="text-xl font-semibold mb-4">Método de Pago</h2>
+  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-3">Tipo de pago *</label>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <label class="flex items-center gap-2 cursor-pointer p-2 border rounded hover:bg-gray-50">
+          <input type="radio" formControlName="type" value="credit_card" />
+          Tarjeta de Crédito
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer p-2 border rounded hover:bg-gray-50">
+          <input type="radio" formControlName="type" value="debit_card" />
+          Tarjeta de Débito
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer p-2 border rounded hover:bg-gray-50">
+          <input type="radio" formControlName="type" value="paypal" />
+          PayPal
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer p-2 border rounded hover:bg-gray-50">
+          <input type="radio" formControlName="type" value="cash_on_delivery" />
+          Pago Contra Entrega
+        </label>
+      </div>
+      @if (getFieldError('type')) {
+        <p class="mt-1 text-sm text-red-600">{{ getFieldError('type') }}</p>
+      }
+    </div>
+    @if (paymentForm.value.type === 'credit_card' || paymentForm.value.type === 'debit_card') {
+      <div class="space-y-4 border-t pt-4">
+        <app-form-field
+          label="Número de tarjeta"
+          fieldId="cardNumber"
+          type="text"
+          placeholder="1234 5678 9012 3456"
+          [required]="true"
+          [errorMessage]="getFieldError('cardNumber')"
+          formControlName="cardNumber">
+        </app-form-field>
+        <app-form-field
+          label="Nombre del titular"
+          fieldId="cardHolderName"
+          type="text"
+          placeholder="Juan Pérez"
+          [required]="true"
+          [errorMessage]="getFieldError('cardHolderName')"
+          formControlName="cardHolderName">
+        </app-form-field>
+        <app-form-field
+          label="Fecha de expiración"
+          fieldId="expiryDate"
+          type="text"
+          placeholder="MM/YY"
+          [required]="true"
+          [errorMessage]="getFieldError('expiryDate')"
+          formControlName="expiryDate">
+        </app-form-field>
+      </div>
+    }
+    @if (paymentForm.value.type === 'paypal') {
+      <div class="border-t pt-4">
+        <app-form-field
+          label="Correo de PayPal"
+          fieldId="paypalEmail"
+          type="email"
+          placeholder="correo@paypal.com"
+          [required]="true"
+          [errorMessage]="getFieldError('paypalEmail')"
+          formControlName="paypalEmail">
+        </app-form-field>
+      </div>
+    }
+    @if (paymentForm.value.type === 'cash_on_delivery') {
+      <div class="border-t pt-4">
+        <app-form-field
+          label="Detalles adicionales"
+          fieldId="cashDetails"
+          type="text"
+          placeholder="Instrucciones para el repartidor (opcional)"
+          [required]="false"
+          [errorMessage]="getFieldError('cashDetails')"
+          formControlName="cashDetails">
+        </app-form-field>
+      </div>
+    }
+    <button
+      type="submit"
+      [disabled]="!paymentForm.valid"
+      class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+    >
+      {{ isEditMode ? 'Actualizar método' : 'Agregar método de pago' }}
+    </button>
+  </form>
+</div>
