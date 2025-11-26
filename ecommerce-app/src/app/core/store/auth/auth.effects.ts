@@ -7,14 +7,14 @@ import { jwtDecode } from 'jwt-decode';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { decodedToken } from '../../types/Token';
 import * as AuthActions from './auth.actions';
-
+import { environment } from '../../../../environments/environment';
 @Injectable()
 export class AuthEffects {
   private readonly actions$ = inject(Actions);
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
   private readonly toast = inject(ToastService);
-  private readonly baseUrl = 'http://localhost:3000/api/auth';
+  private readonly baseUrl = `${environment.BACK_URL}/auth`;
 
   initializeAuth$ = createEffect(() =>
     this.actions$.pipe(
@@ -36,7 +36,7 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
-      tap(credentials=>console.log(credentials)),
+      tap(credentials => console.log(credentials)),
       switchMap(({ credentials }) =>
         this.http
           .post<{ token: string; refreshToken: string }>(
@@ -160,32 +160,32 @@ export class AuthEffects {
           `${this.baseUrl}/refresh-token`,
           { token: refreshToken }
         ).pipe(
-          map((response)=> {
+          map((response) => {
             // Actualizar tokens en localStorage
-              localStorage.setItem('token', response.token);
-              localStorage.setItem('refreshToken', response.refreshToken);
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('refreshToken', response.refreshToken);
 
-              // Decodificar nuevo token
-              const decoded = jwtDecode<decodedToken>(response.token);
-              return AuthActions.refreshTokenSuccess({
-                token: response.token,
-                refreshToken: response.refreshToken,
-                decodedToken: decoded,
-              });
+            // Decodificar nuevo token
+            const decoded = jwtDecode<decodedToken>(response.token);
+            return AuthActions.refreshTokenSuccess({
+              token: response.token,
+              refreshToken: response.refreshToken,
+              decodedToken: decoded,
+            });
           }),
           catchError((error) => {
-              console.error('Error al refrescar token:', error);
+            console.error('Error al refrescar token:', error);
 
-              // Si falla, hacer logout
-              localStorage.removeItem('token');
-              localStorage.removeItem('refreshToken');
+            // Si falla, hacer logout
+            localStorage.removeItem('token');
+            localStorage.removeItem('refreshToken');
 
-              return of(
-                AuthActions.refreshTokenFailure({
-                  error: 'Sesión expirada',
-                })
-              );
-            })
+            return of(
+              AuthActions.refreshTokenFailure({
+                error: 'Sesión expirada',
+              })
+            );
+          })
         )
       )
     )

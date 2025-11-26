@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError,  } from 'rxjs';
+import { catchError, map, Observable, throwError, } from 'rxjs';
 import { Product, ProductResponse } from '../../types/Products';
+import { environment } from '../../../../environments/environment';
 
 export type filters = {
   q: string;
@@ -13,8 +14,8 @@ export type filters = {
   providedIn: 'root',
 })
 export class ProductsService {
-  private baseUrl = 'http://localhost:3000/api/products';
-  constructor(private httpClient: HttpClient) {}
+  private baseUrl = `${environment.BACK_URL}/products`;
+  constructor(private httpClient: HttpClient) { }
 
   getProducts(page: number = 1, limit: number = 10) {
     return this.httpClient
@@ -23,13 +24,13 @@ export class ProductsService {
 
   }
 
-  getProductByID(id:string):Observable<Product>{
+  getProductByID(id: string): Observable<Product> {
     return this.httpClient.get<Product>(`${this.baseUrl}/${id}`);
   }
 
-  searchProducts(searchConfig:filters):Observable<Product[]>{
-    let filters:filters ={
-      q:searchConfig.q
+  searchProducts(searchConfig: filters): Observable<Product[]> {
+    let filters: filters = {
+      q: searchConfig.q
     }
     if (searchConfig.minPrice) {
       filters.minPrice = searchConfig.minPrice;
@@ -37,9 +38,9 @@ export class ProductsService {
     if (searchConfig.maxPrice) {
       filters.maxPrice = searchConfig.maxPrice;
     }
-    const params = new HttpParams({fromObject: filters});
-    return this.httpClient.get<ProductResponse>(`${this.baseUrl}/search`, {params}).pipe(
-      map(response=>{
+    const params = new HttpParams({ fromObject: filters });
+    return this.httpClient.get<ProductResponse>(`${this.baseUrl}/search`, { params }).pipe(
+      map(response => {
         return response.products;
       })
     )

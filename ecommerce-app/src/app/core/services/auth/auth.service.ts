@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, map, Observable, } from 'rxjs';
 import { tokenSchema } from '../../types/Token';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 export type decodedToken = {
   userId: string;
@@ -14,7 +15,7 @@ export type decodedToken = {
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = 'http://localhost:3000/api';
+  baseUrl = `${environment.BACK_URL}`;
 
   private readonly httpClient = inject(HttpClient);
 

@@ -9,28 +9,67 @@ dotenv.config();
 const { MONGODB_URI, MONGODB_DB } = process.env;
 const IMG = (text) => `https://placehold.co/800x600.png?text=${encodeURIComponent(text)}`;
 
-// 1) Upsert de CATEGORÍAS (10 nombres exactos)
 const CATEGORY_DOCS = [
-  { name: "Design System",    description: "Sistemas de diseño y librerías de UI",            imageURL: IMG("Design System"),    parentCategory: null },
-  { name: "Branding",         description: "Identidad visual, logo y brandbook",              imageURL: IMG("Branding"),         parentCategory: null },
-  { name: "Video",            description: "Edición, motion graphics y teasers",              imageURL: IMG("Video"),            parentCategory: null },
-  { name: "Programación",     description: "APIs, automatizaciones e integraciones",          imageURL: IMG("Programación"),     parentCategory: null },
-  { name: "Data & Analytics", description: "Dashboards, KPIs y BI",                           imageURL: IMG("Data & Analytics"), parentCategory: null },
-  { name: "Administración",   description: "Operaciones, soporte y mantenimiento",            imageURL: IMG("Administración"),   parentCategory: null },
-  { name: "UX/UI",            description: "Investigación, wireframes y prototipos",          imageURL: IMG("UX/UI"),            parentCategory: null },
-  { name: "Consultoría",      description: "Estrategia y asesorías",                          imageURL: IMG("Consultoría"),      parentCategory: null },
-  { name: "Marketing",        description: "Campañas, copies, calendarios y performance",     imageURL: IMG("Marketing"),        parentCategory: null },
-  { name: "Capacitación",     description: "Workshops, entrenamientos y playbooks operativos", imageURL: IMG("Capacitación"),     parentCategory: null },
+  {
+    name: "UX/UI",
+    description:
+      "Templates and systems for designers who create meaningful digital experiences. Includes tools like Figma, Miro, Marvel, Typeform, and principles such as Atomic Design, Autolayout, and Pixel Perfect execution.",
+    imageURL: IMG("UX/UI"),
+    parentCategory: null,
+  },
+  {
+    name: "Design",
+    description:
+      "Creative assets and visual identity kits for professionals who want to build strong brands and aesthetic consistency. Built with Canva, Photoshop, Illustrator, and Capcut for both digital and print projects.",
+    imageURL: IMG("Design"),
+    parentCategory: null,
+  },
+  {
+    name: "Administration",
+    description:
+      "Strategic and productivity templates for project managers, freelancers, and teams using SCRUM and agile frameworks. Includes Notion, Trello, ClickUp, Google Calendar, and Rise for e-learning and management.",
+    imageURL: IMG("Administration"),
+    parentCategory: null,
+  },
+  {
+    name: "Programming",
+    description:
+      "Code-based templates, UI components, and starter projects for developers using Angular, Bootstrap, Visual Studio Code, GitHub, WordPress, and modern deployment tools like Shopify and Vercel.",
+    imageURL: IMG("Programming"),
+    parentCategory: null,
+  },
+  {
+    name: "E-Learning",
+    description:
+      "Interactive learning and course-building templates powered by Rise, Genially, and Kajabi—ideal for educators, coaches, and creators launching online academies.",
+    imageURL: IMG("E-Learning"),
+    parentCategory: null,
+  },
+  {
+    name: "AI",
+    description:
+      "AI-powered templates and workflows that enhance creativity and productivity using tools like ChatGPT, Copilot, DALL·E, Leonardo AI, Eleven Labs, Pikaso, and Napkin.",
+    imageURL: IMG("AI"),
+    parentCategory: null,
+  },
+  {
+    name: "Web Tools",
+    description:
+      "Ready-to-launch web and e-commerce templates built with WordPress, Wix, Readymag, Divi, Shopify, GoDaddy, and Hostinger—designed for modern online brands.",
+    imageURL: IMG("Web Tools"),
+    parentCategory: null,
+  },
 ];
+
 
 // 2) Catálogo (30 ítems)
 const ITEMS = [
   // Design System
-  { name: "DS-PL-001 · Design System Starter (Plantilla Figma)", price: 2200,  stock: 999, categoryName: "Design System",
+  { name: "Design System Starter (Plantilla Figma)", price: 2200,  stock: 999, categoryName: "Design System",
     description: "Librería base en Figma con tokens, estilos y checklist AA.", image: IMG("Design System") },
-  { name: "DS-SV-002 · Design System Pro (a medida)",            price: 14000, stock: 100, categoryName: "Design System",
+  { name: "Design System Pro (a medida)",            price: 14000, stock: 100, categoryName: "Design System",
     description: "Auditoría 10–15 pantallas, librería custom y handoff a devs.", image: IMG("Design System Pro") },
-  { name: "DS-SV-003 · Governance & Adoption Workshop (½ día)",  price: 7500,  stock: 100, categoryName: "Design System",
+  { name: "Governance & Adoption Workshop (½ día)",  price: 7500,  stock: 100, categoryName: "Design System",
     description: "Reglas, versionado, roles y plan de adopción del DS.", image: IMG("DS Governance") },
 
   // Branding
@@ -74,8 +113,12 @@ const ITEMS = [
     description: "Redacción, adopción y capacitación de procesos.", image: IMG("SOPs") },
 
   // UX/UI
-  { name: "UX-PL-001 · Wireframe Kit (Figma)",                   price: 1200,  stock: 999, categoryName: "UX/UI",
-    description: "Componentes low-fi para login/onboarding/listing/checkout.", image: IMG("Wireframe Kit") },
+  { name: "UX-PL-001 · Wireframe Kit (Figma)",                   
+    price: 1200,  
+    stock: 999, 
+    categoryName: "UX/UI",
+    description: "Componentes low-fi para login/onboarding/listing/checkout.", 
+    image: IMG("Wireframe Kit") },
   { name: "UX-SV-002 · Prototipo Navegable (1 flujo)",           price: 6500,  stock: 100, categoryName: "UX/UI",
     description: "De idea a prototipo clickable + handoff.", image: IMG("Prototipo") },
   { name: "UX-SV-003 · Test de Usabilidad Rápido (5 usuarios)",  price: 8000,  stock: 100, categoryName: "UX/UI",
