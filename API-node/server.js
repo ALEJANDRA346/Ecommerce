@@ -6,6 +6,8 @@ import logger from './src/middlewares/logger.js';
 import setupGlobalErrorHandlers from './src/middlewares/globalErrorHandler.js';
 import errorHandler from './src/middlewares/errorHandler.js'; // Importar errorHandler
 import cors from 'cors';
+import seedUsers from './src/scripts/seedUsers.js';
+import seedProducts from './src/scripts/seedProducts.js';
 
 dotenv.config();
 
@@ -14,6 +16,8 @@ setupGlobalErrorHandlers();
 
 const app = express();
 dbConnection();
+seedUsers();
+seedProducts();
 app.use(cors({
   origin: process.env.FRONT_URL, // Permitir solicitudes desde cualquier origen
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Métodos permitidos
