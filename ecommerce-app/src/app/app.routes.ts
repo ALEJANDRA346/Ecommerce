@@ -4,6 +4,7 @@ import { ProfileComponent } from './pages/user/profile/profile.component';
 import { USER_ROUTES } from './pages/user/user.routes';
 import { authGuard } from './core/guards/auth/auth.guard';
 import { formGuard } from './core/guards/form/form.guard';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 
 export const routes: Routes = [
@@ -17,27 +18,38 @@ export const routes: Routes = [
     title: 'products',
   },
   {
-    path:'product-view/:id', 
+    path: 'product-view/:id',
     loadComponent: () => import('../app/pages/product-detail/product-detail.component').then(
-      (c)=> c.ProductDetailComponent
+      (c) => c.ProductDetailComponent
     ),
-    title:'product details',
+    title: 'product details',
   },
   {
-    path: 'register', loadComponent:()=> import('../app/pages/register/register.component').then(c=>c.RegisterComponent),
+    path: 'register', loadComponent: () => import('../app/pages/register/register.component').then(c => c.RegisterComponent),
     title: 'registro',
     // canDeactivate: [formGuard,/*A, B, C */ ]
   },
   {
-    path: 'login', loadComponent: ()=> import('../app/pages/login/login.component').then(c=>c.LoginComponent),
+    path: 'login', loadComponent: () => import('../app/pages/login/login.component').then(c => c.LoginComponent),
     title: 'login',
     canDeactivate: [formGuard]
   },
   {
-    path: 'user', loadComponent: () => import('../app/pages/user/user.component').then(c=>c.UserComponent),
+    path: 'user', loadComponent: () => import('../app/pages/user/user.component').then(c => c.UserComponent),
     //children: USER_ROUTES
-    loadChildren: () => import('../app/pages/user/user.routes').then(r=>r.USER_ROUTES),
-    canActivate:[authGuard]
+    loadChildren: () => import('../app/pages/user/user.routes').then(r => r.USER_ROUTES),
+    canActivate: [authGuard]
   },
+  { path: '', component: HomeComponent, title: 'Home' },
+  // ...
+  {
+    path: 'checkout',
+    loadComponent: () =>
+      import('./pages/checkout/checkout.component').then(
+        c => c.CheckoutComponent
+      ),
+    title: 'Checkout',
+  },
+
 
 ];
