@@ -47,13 +47,13 @@ export class AsideComponent implements OnInit {
   ];
   user$: Observable<decodedToken | null> = of(null);
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store) { }
 
   ngOnInit(): void {
     this.user$ = this.store.select(selectDecodedToken);
   }
-  
-  logout(){
+
+  logout() {
     this.store.dispatch(Logout());
   }
 }

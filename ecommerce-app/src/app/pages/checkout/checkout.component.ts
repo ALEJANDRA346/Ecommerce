@@ -29,12 +29,12 @@ export class CheckoutComponent {
 
     this.orderService.createOrder(this.checkoutForm.value).subscribe({
       next: () => {
-        // Simulación de compra exitosa
         this.router.navigate(['/user/profile']);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al crear pedido', err);
       },
     });
+
   }
 }

@@ -15,7 +15,7 @@ export type decodedToken = {
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = `${environment.BACK_URL}`;
+  baseUrl = `${environment.BACK_URL}/api`;
 
   private readonly httpClient = inject(HttpClient);
 

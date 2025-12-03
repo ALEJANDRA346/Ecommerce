@@ -1,48 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductResponse } from '../../../core/types/Products';
-import { ProductsCardComponent } from "../products-card/products-card.component";
+import { CommonModule } from '@angular/common';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ProductsService } from '../../../core/services/products/products.service';
-import { PlaceholderComponent } from "../../shared/placeholder/placeholder.component";
-import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
+import { ProductsCardComponent } from '../products-card/products-card.component';
+import { ProductResponse } from '../../../core/types/Products';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [ProductsCardComponent, PlaceholderComponent, MatPaginatorModule],
+  imports: [CommonModule, ProductsCardComponent, MatPaginatorModule],
   templateUrl: './products-list.component.html',
-  styleUrl: './products-list.component.css'
+  styleUrl: './products-list.component.css',
 })
-export class ProductsListComponent implements OnInit{
-  productResponse!:ProductResponse;
+export class ProductsListComponent implements OnInit {
+  productResponse: ProductResponse | null = null;
+  isLoading = false;
+  hasError = false;
 
-  constructor(private productsService: ProductsService){}
+  constructor(private productsService: ProductsService) { }
+
   ngOnInit(): void {
     this.getProducts();
   }
 
-  getProducts(page:number=1, limit:number=16){
+  getProducts(page: number = 1, limit: number = 16): void {
+    this.isLoading = true;
+    this.hasError = false;
+
     this.productsService.getProducts(page, limit).subscribe({
-      next:(data)=>{
-        console.log(data);
-        this.productResponse = data;
+      next: (response) => {
+        console.log('RESPUESTA PRODUCTS ====>', response);
+        this.productResponse = response;
+        this.isLoading = false;
       },
-      error:(error)=>{
-        console.log(error);
-      }
-    })
-  }
-  onPageChange(event: PageEvent){
-    console.log(event);
-    this.getProducts(event.pageIndex, event.pageSize);
+      error: (error: any) => {
+        console.error('Error al cargar productos', error);
+        this.isLoading = false;
+        this.hasError = true;
+      },
+    });
   }
 
-  get skeletonArray(): number[] {
-    const expectedCount = this.productResponse?.products?.length || 8;
-    return Array(expectedCount).fill(0);
+  onPageChange(event: PageEvent): void {
+    this.getProducts(event.pageIndex + 1, event.pageSize);
   }
-  
-  retryLoadProducts(): void {
-    this.getProducts();
-  }
- 
 }

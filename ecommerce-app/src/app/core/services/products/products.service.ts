@@ -14,7 +14,9 @@ export type filters = {
   providedIn: 'root',
 })
 export class ProductsService {
-  private baseUrl = `${environment.BACK_URL}/products`;
+
+  private baseUrl = `${environment.BACK_URL}/api/products`;
+
   constructor(private httpClient: HttpClient) { }
 
   getProducts(page: number = 1, limit: number = 10) {
