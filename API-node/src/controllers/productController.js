@@ -45,18 +45,30 @@ async function getProductById(req, res, next) {
 async function getProductByCategory(req, res, next) {
   try {
     const id = req.params.idCategory;
+
     const products = await Product
       .find({ category: id })
       .populate('category')
       .sort({ name: 1 });
-    if (products.length === 0) {
-      return res.status(404).json({ message: 'No products found on this category' });
-    }
-    res.json(products);
+
+    const totalResults = products.length;
+
+    res.json({
+      products,
+      pagination: {
+        currentPage: 1,
+        totalPages: 1,
+        totalResults,
+        hasNext: false,
+        hasPrev: false,
+      }
+    });
+
   } catch (error) {
-    res.status(500).json({ error });
+    next(error);
   }
 }
+
 
 async function createProduct(req, res, next) {
   try {
