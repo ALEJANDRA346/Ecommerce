@@ -5,9 +5,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ToastService } from '../../services/toast/toast.service';
 import { jwtDecode } from 'jwt-decode';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { decodedToken } from '../../types/Token';
+import { DecodedToken } from '../../types/DecodedToken';
 import * as AuthActions from './auth.actions';
 import { environment } from '../../../../environments/environment';
+
 @Injectable()
 export class AuthEffects {
   private readonly actions$ = inject(Actions);
@@ -26,8 +27,7 @@ export class AuthEffects {
           return AuthActions.initializeAuthFailure();
         }
 
-        const decoded = jwtDecode<decodedToken>(token);
-        console.log(decoded);
+        const decoded = jwtDecode<DecodedToken>(token);
         return AuthActions.initializeAuthSuccess({ decodedToken: decoded });
       })
     )
@@ -36,7 +36,6 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
-      tap(credentials => console.log(credentials)),
       switchMap(({ credentials }) =>
         this.http
           .post<{ token: string; refreshToken: string }>(
@@ -47,7 +46,9 @@ export class AuthEffects {
             map((response) => {
               localStorage.setItem('token', response.token);
               localStorage.setItem('refreshToken', response.refreshToken);
-              const decoded = jwtDecode<decodedToken>(response.token);
+
+              const decoded = jwtDecode<DecodedToken>(response.token);
+
               return AuthActions.loginSuccess({
                 token: response.token,
                 refreshToken: response.refreshToken,
@@ -55,7 +56,6 @@ export class AuthEffects {
               });
             }),
             catchError((error) => {
-              console.error('Error en login:', error);
               return of(
                 AuthActions.loginFailure({
                   error: error.error?.message || 'Error al iniciar sesión',
@@ -78,6 +78,7 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
+
   loginFailure$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -95,20 +96,18 @@ export class AuthEffects {
       switchMap(({ userData }) =>
         this.http.post(`${this.baseUrl}/register`, userData).pipe(
           map(() => AuthActions.registerSuccess()),
-          catchError((error) => {
-            console.error('Error en registro:', error);
-            return of(
+          catchError((error) =>
+            of(
               AuthActions.registerFailure({
                 error: error.error?.message || 'Error al registrarse',
               })
-            );
-          })
+            )
+          )
         )
       )
     )
   );
 
-  // Register Success - Show Toast and Redirect
   registerSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -121,7 +120,6 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  // Register Failure - Show Toast
   registerFailure$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -138,14 +136,9 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.Logout),
         tap(() => {
-          // Limpiar localStorage
           localStorage.removeItem('token');
           localStorage.removeItem('refreshToken');
-
-          // Mostrar toast
           this.toast.success('Sesión cerrada correctamente');
-
-          // Redirigir al home
           this.router.navigate(['/']);
         })
       ),
@@ -156,40 +149,39 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.refreshToken),
       switchMap(({ refreshToken }) =>
-        this.http.post<{ token: string; refreshToken: string }>(
-          `${this.baseUrl}/refresh-token`,
-          { token: refreshToken }
-        ).pipe(
-          map((response) => {
-            // Actualizar tokens en localStorage
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('refreshToken', response.refreshToken);
+        this.http
+          .post<{ token: string; refreshToken: string }>(
+            `${this.baseUrl}/refresh-token`,
+            { token: refreshToken }
+          )
+          .pipe(
+            map((response) => {
+              localStorage.setItem('token', response.token);
+              localStorage.setItem('refreshToken', response.refreshToken);
 
-            // Decodificar nuevo token
-            const decoded = jwtDecode<decodedToken>(response.token);
-            return AuthActions.refreshTokenSuccess({
-              token: response.token,
-              refreshToken: response.refreshToken,
-              decodedToken: decoded,
-            });
-          }),
-          catchError((error) => {
-            console.error('Error al refrescar token:', error);
+              const decoded = jwtDecode<DecodedToken>(response.token);
 
-            // Si falla, hacer logout
-            localStorage.removeItem('token');
-            localStorage.removeItem('refreshToken');
+              return AuthActions.refreshTokenSuccess({
+                token: response.token,
+                refreshToken: response.refreshToken,
+                decodedToken: decoded,
+              });
+            }),
+            catchError(() => {
+              localStorage.removeItem('token');
+              localStorage.removeItem('refreshToken');
 
-            return of(
-              AuthActions.refreshTokenFailure({
-                error: 'Sesión expirada',
-              })
-            );
-          })
-        )
+              return of(
+                AuthActions.refreshTokenFailure({
+                  error: 'Sesión expirada',
+                })
+              );
+            })
+          )
       )
     )
   );
+
   refreshTokenFailure$ = createEffect(
     () =>
       this.actions$.pipe(

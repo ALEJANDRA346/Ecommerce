@@ -50,6 +50,16 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(logger);
 
+// DEBUG: Log body de requests DELETE
+app.use((req, res, next) => {
+  if (req.method === 'DELETE') {
+    console.log('🔍 DELETE request to:', req.url);
+    console.log('🔍 Body:', JSON.stringify(req.body));
+    console.log('🔍 Headers:', req.headers['content-type']);
+  }
+  next();
+});
+
 // Ruta de prueba
 app.get('/', (req, res) => {
   res.send('WELCOME!');

@@ -1,13 +1,11 @@
 import Order from '../models/order.js';
 import errorHandler from '../middlewares/errorHandler.js';
 
-async function getOrders(req, res) {
+async function getOrders(req, res, next) {
   try {
     const orders = await Order.find()
       .populate('user', '-hashPassword')
       .populate('products.productId')
-      .populate('shippingAddress')
-      .populate('paymentMethod')
       .sort({ status: 1 });
     res.json(orders);
   } catch (error) {
@@ -15,14 +13,12 @@ async function getOrders(req, res) {
   }
 }
 
-async function getOrderById(req, res) {
+async function getOrderById(req, res, next) {
   try {
     const id = req.params.id;
     const order = await Order.findById(id)
       .populate('user', '-hashPassword')
-      .populate('products.productId')
-      .populate('shippingAddress')
-      .populate('paymentMethod');
+      .populate('products.productId');
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
@@ -32,14 +28,12 @@ async function getOrderById(req, res) {
   }
 }
 
-async function getOrdersByUser(req, res) {
+async function getOrdersByUser(req, res, next) {
   try {
     const userId = req.params.userId;
     const orders = await Order.find({ user: userId })
       .populate('user', '-hashPassword')
       .populate('products.productId')
-      .populate('shippingAddress')
-      .populate('paymentMethod')
       .sort({ status: 1 });
 
     if (orders.length === 0) {
@@ -51,7 +45,7 @@ async function getOrdersByUser(req, res) {
   }
 }
 
-async function createOrder(req, res) {
+async function createOrder(req, res, next) {
   try {
     const {
       user,
@@ -95,8 +89,6 @@ async function createOrder(req, res) {
 
     await newOrder.populate('user', '-hashPassword');
     await newOrder.populate('products.productId');
-    await newOrder.populate('shippingAddress');
-    await newOrder.populate('paymentMethod');
 
     res.status(201).json(newOrder);
   } catch (error) {
@@ -104,7 +96,7 @@ async function createOrder(req, res) {
   }
 }
 
-async function updateOrder(req, res) {
+async function updateOrder(req, res, next) {
   try {
     const { id } = req.params;
     const updateData = req.body;
@@ -148,7 +140,7 @@ async function updateOrder(req, res) {
   }
 }
 
-async function cancelOrder(req, res) {
+async function cancelOrder(req, res, next) {
   try {
     const { id } = req.params;
 
@@ -183,7 +175,7 @@ async function cancelOrder(req, res) {
   }
 }
 
-async function updateOrderStatus(req, res) {
+async function updateOrderStatus(req, res, next) {
   try {
     const { id } = req.params;
     const { status } = req.body;
@@ -215,7 +207,7 @@ async function updateOrderStatus(req, res) {
   }
 }
 
-async function updatePaymentStatus(req, res) {
+async function updatePaymentStatus(req, res, next) {
   try {
     const { id } = req.params;
     const { paymentStatus } = req.body;

@@ -2,19 +2,18 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[appOffer]',
-  standalone:true
+  standalone: true
 })
 export class OfferDirective {
-  @Input() set appOffer(offer: number){
-    this.viewContainer.clear();
-    if (offer >=10) {
-      this.viewContainer.createEmbeddedView(this.templateRef);
+  constructor(
+    private tpl: TemplateRef<any>,
+    private vcr: ViewContainerRef
+  ) { }
+
+  @Input() set appOffer(value: number | null) {
+    this.vcr.clear();
+    if (value && value > 0) {
+      this.vcr.createEmbeddedView(this.tpl);
     }
   }
-
-  constructor(
-    private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef
-  ){ }
-
 }

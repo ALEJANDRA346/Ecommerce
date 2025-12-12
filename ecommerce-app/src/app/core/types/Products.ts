@@ -2,15 +2,23 @@ import z from 'zod';
 import { Category } from './Category';
 
 export type Product = {
-  _id:string;
+  _id: string;
   name: string;
   description: string;
   price: number;
   offer: number;
   stock: number;
-  imageUrl: string;
+  maxPerOrder?: number;
+
+  // ✔ Ahora coincide con el backend
+  imagesUrl: string[];
+
+  // (Opcional si tu backend también enviaba uno viejo)
+  imageUrl?: string;
+
   category: Category;
 };
+
 export type ProductResponse = {
   products: Product[];
   pagination: {
@@ -23,11 +31,14 @@ export type ProductResponse = {
 };
 
 export const cartProductSchema = z.object({
-    _id: z.string(),
-    name: z.string(),
-    description: z.string().optional(),
-    price: z.number(),
-    imageUrl: z.string().optional(),
-    stock: z.number(),
-    category: z.string(),
+  _id: z.string(),
+  name: z.string(),
+  description: z.string().optional(),
+  price: z.number(),
+
+  // ✔ Arreglado para aceptar imagesUrl del backend
+  imagesUrl: z.array(z.string()).optional(),
+
+  stock: z.number(),
+  category: z.string(),
 });

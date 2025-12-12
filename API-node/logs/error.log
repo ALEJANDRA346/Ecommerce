@@ -166,3 +166,111 @@
     at module.exports [as verify] (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\jsonwebtoken\verify.js:101:10)
     at authMiddleware (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/ProyectoFinal/API-node/src/middlewares/authMiddleware.js:10:7)
     at Layer.handleRequest (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\ProyectoFinal\API-node\node_modules\router\lib\layer.js:152:17)
+2025-12-12T01:37:27.945Z | POST /api/orders | next is not defined | ReferenceError: next is not defined
+    at createOrder (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/Frankenstein/API-node/src/controllers/orderController.js:103:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-12-12T01:39:13.662Z | POST /api/orders | Order validation failed: shippingAddress: Cast to ObjectId failed for value "{
+  address: 'Reserva Sequoia 341',
+  city: 'Aguascalientes',
+  postalCode: '20326',
+  country: 'México'
+}" (type Object) at path "shippingAddress" because of "BSONError", paymentMethod: Cast to ObjectId failed for value "{ type: 'card' }" (type Object) at path "paymentMethod" because of "BSONError" | ValidationError: Order validation failed: shippingAddress: Cast to ObjectId failed for value "{
+  address: 'Reserva Sequoia 341',
+  city: 'Aguascalientes',
+  postalCode: '20326',
+  country: 'México'
+}" (type Object) at path "shippingAddress" because of "BSONError", paymentMethod: Cast to ObjectId failed for value "{ type: 'card' }" (type Object) at path "paymentMethod" because of "BSONError"
+    at Document.invalidate (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:3358:32)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:1480:12)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:1132:16)
+    at model.Document (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:178:12)
+    at model.Model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:127:12)
+    at new model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:4834:15)
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:2775:20
+    at Array.map (<anonymous>)
+    at Function.create (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:2763:34)
+    at createOrder (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/Frankenstein/API-node/src/controllers/orderController.js:85:34)
+2025-12-12T01:39:31.941Z | POST /api/orders | Order validation failed: shippingAddress: Cast to ObjectId failed for value "{
+  address: 'Reserva Sequoia 341',
+  city: 'Aguascalientes',
+  postalCode: '20326',
+  country: 'México'
+}" (type Object) at path "shippingAddress" because of "BSONError", paymentMethod: Cast to ObjectId failed for value "{ type: 'card' }" (type Object) at path "paymentMethod" because of "BSONError" | ValidationError: Order validation failed: shippingAddress: Cast to ObjectId failed for value "{
+  address: 'Reserva Sequoia 341',
+  city: 'Aguascalientes',
+  postalCode: '20326',
+  country: 'México'
+}" (type Object) at path "shippingAddress" because of "BSONError", paymentMethod: Cast to ObjectId failed for value "{ type: 'card' }" (type Object) at path "paymentMethod" because of "BSONError"
+    at Document.invalidate (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:3358:32)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:1480:12)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:1132:16)
+    at model.Document (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:178:12)
+    at model.Model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:127:12)
+    at new model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:4834:15)
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:2775:20
+    at Array.map (<anonymous>)
+    at Function.create (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:2763:34)
+    at createOrder (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/Frankenstein/API-node/src/controllers/orderController.js:85:34)
+2025-12-12T01:40:34.339Z | POST /api/orders | Order validation failed: shippingAddress: Cast to ObjectId failed for value "{
+  address: 'Reserva Sequoia 341',
+  city: 'Aguascalientes',
+  postalCode: '20326',
+  country: 'México'
+}" (type Object) at path "shippingAddress" because of "BSONError", paymentMethod: Cast to ObjectId failed for value "{ type: 'card' }" (type Object) at path "paymentMethod" because of "BSONError" | ValidationError: Order validation failed: shippingAddress: Cast to ObjectId failed for value "{
+  address: 'Reserva Sequoia 341',
+  city: 'Aguascalientes',
+  postalCode: '20326',
+  country: 'México'
+}" (type Object) at path "shippingAddress" because of "BSONError", paymentMethod: Cast to ObjectId failed for value "{ type: 'card' }" (type Object) at path "paymentMethod" because of "BSONError"
+    at Document.invalidate (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:3358:32)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:1480:12)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:1132:16)
+    at model.Document (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:178:12)
+    at model.Model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:127:12)
+    at new model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:4834:15)
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:2775:20
+    at Array.map (<anonymous>)
+    at Function.create (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:2763:34)
+    at createOrder (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/Frankenstein/API-node/src/controllers/orderController.js:85:34)
+2025-12-12T01:44:13.338Z | POST /api/orders | Order validation failed: shippingAddress: Cast to ObjectId failed for value "{
+  address: 'Reserva Sequoia 341',
+  city: 'Aguascalientes',
+  postalCode: '20326',
+  country: 'México'
+}" (type Object) at path "shippingAddress" because of "BSONError", paymentMethod: Cast to ObjectId failed for value "{ type: 'card' }" (type Object) at path "paymentMethod" because of "BSONError" | ValidationError: Order validation failed: shippingAddress: Cast to ObjectId failed for value "{
+  address: 'Reserva Sequoia 341',
+  city: 'Aguascalientes',
+  postalCode: '20326',
+  country: 'México'
+}" (type Object) at path "shippingAddress" because of "BSONError", paymentMethod: Cast to ObjectId failed for value "{ type: 'card' }" (type Object) at path "paymentMethod" because of "BSONError"
+    at Document.invalidate (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:3358:32)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:1480:12)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:1132:16)
+    at model.Document (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:178:12)
+    at model.Model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:127:12)
+    at new model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:4834:15)
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:2775:20
+    at Array.map (<anonymous>)
+    at Function.create (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:2763:34)
+    at createOrder (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/Frankenstein/API-node/src/controllers/orderController.js:85:34)
+2025-12-12T01:44:21.163Z | POST /api/orders | Order validation failed: shippingAddress: Cast to ObjectId failed for value "{
+  address: 'Reserva Sequoia 341',
+  city: 'Aguascalientes',
+  postalCode: '20326',
+  country: 'México'
+}" (type Object) at path "shippingAddress" because of "BSONError", paymentMethod: Cast to ObjectId failed for value "{ type: 'card' }" (type Object) at path "paymentMethod" because of "BSONError" | ValidationError: Order validation failed: shippingAddress: Cast to ObjectId failed for value "{
+  address: 'Reserva Sequoia 341',
+  city: 'Aguascalientes',
+  postalCode: '20326',
+  country: 'México'
+}" (type Object) at path "shippingAddress" because of "BSONError", paymentMethod: Cast to ObjectId failed for value "{ type: 'card' }" (type Object) at path "paymentMethod" because of "BSONError"
+    at Document.invalidate (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:3358:32)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:1480:12)
+    at model.$set (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:1132:16)
+    at model.Document (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\document.js:178:12)
+    at model.Model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:127:12)
+    at new model (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:4834:15)
+    at C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:2775:20
+    at Array.map (<anonymous>)
+    at Function.create (C:\Users\USUARIO\OneDrive\Escritorio\Indptds\Frankenstein\API-node\node_modules\mongoose\lib\model.js:2763:34)
+    at createOrder (file:///C:/Users/USUARIO/OneDrive/Escritorio/Indptds/Frankenstein/API-node/src/controllers/orderController.js:85:34)

@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { UserCredentials, UserForm } from '../../types/User';
-import { decodedToken } from '../../types/Token';
+import { DecodedToken } from '../../types/DecodedToken';
 
 export const login = createAction(
   '[Auth] login',
@@ -9,7 +9,7 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
   '[Auth] Login Success',
-  props<{ token: string; refreshToken: string; decodedToken: decodedToken }>()
+  props<{ token: string; refreshToken: string; decodedToken: DecodedToken }>()
 );
 
 export const loginFailure = createAction(
@@ -25,6 +25,7 @@ export const register = createAction(
 );
 
 export const registerSuccess = createAction('[Auth] Register Success');
+
 export const registerFailure = createAction(
   '[Auth] Register Failure',
   props<{ error: string }>()
@@ -37,7 +38,7 @@ export const refreshToken = createAction(
 
 export const refreshTokenSuccess = createAction(
   '[Auth] Refresh Token Success',
-  props<{ token: string; refreshToken: string; decodedToken: decodedToken }>()
+  props<{ token: string; refreshToken: string; decodedToken: DecodedToken }>()
 );
 
 export const refreshTokenFailure = createAction(
@@ -49,7 +50,7 @@ export const initializeAuth = createAction('[Auth] Initialize');
 
 export const initializeAuthSuccess = createAction(
   '[Auth] Initialize Success',
-  props<{ decodedToken: decodedToken }>()
+  props<{ decodedToken: DecodedToken }>()
 );
 
 export const initializeAuthFailure = createAction('[Auth] Initialize Failure');

@@ -7,13 +7,13 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-export type carouselImages =  {
-    src: string;
-    loaded: boolean;
-    loading: boolean;
-    alt: string;
-    
-  }[] 
+export type carouselImages = {
+  src: string;
+  loaded: boolean;
+  loading: boolean;
+  alt: string;
+
+}[]
 @Component({
   selector: 'app-carousel',
   standalone: true,
@@ -24,9 +24,9 @@ export type carouselImages =  {
 export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
   @Input() images: carouselImages = [
     { src: 'images/Carrusel1.gif', loaded: false, loading: false, alt: '' },
-    { src: 'images/esp32.jpg', loaded: false, loading: false, alt: '' },
-    { src: 'images/fruta.jpg', loaded: false, loading: false, alt: '' },
-    { src: 'images/silksong.jpg', loaded: false, loading: false, alt: '' },
+    { src: 'images/2.gif', loaded: false, loading: false, alt: '' },
+    { src: 'images/3.gif', loaded: false, loading: false, alt: '' },
+    { src: 'images/4.gif', loaded: false, loading: false, alt: '' },
   ];
 
   @Input() autoPlay: boolean = true;
@@ -47,13 +47,13 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('cambios en la configuracion del carousel', changes);
-    
+
     if (changes['images'] && !changes['images'].firstChange) {
       this.currentIndex = 0;
       this.resetLoadedStates();
       this.loadImage(this.currentIndex);
     }
-    
+
     if (changes['autoPlay'] && !changes['autoPlay'].firstChange) {
       if (changes['autoPlay'].currentValue) {
         this.startAutoPlay();
@@ -61,7 +61,7 @@ export class CarouselComponent implements OnInit, OnChanges, OnDestroy {
         this.stopAutoPlay();
       }
     }
-    
+
     if (changes['interval'] && !changes['interval'].firstChange && this.autoPlay) {
       this.stopAutoPlay();
       this.startAutoPlay();

@@ -7,6 +7,7 @@ import { formGuard } from './core/guards/form/form.guard';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 
+
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home' },
   {
@@ -16,6 +17,11 @@ export const routes: Routes = [
         (c) => c.ProductsComponent
       ),
     title: 'Products',
+  },
+  {
+    path: 'categories',
+    redirectTo: 'products',
+    pathMatch: 'full',
   },
 
   {
@@ -51,6 +57,16 @@ export const routes: Routes = [
       ),
     title: 'Checkout',
   },
-
-
+  {
+    path: 'cart',
+    loadComponent: () =>
+      import('./pages/user/cart/cart.component').then(c => c.CartComponent),
+    title: 'Carrito',
+  },
+  // Admin routes - redirects temporales mientras se implementan
+  { path: 'admin', redirectTo: 'products', pathMatch: 'full' },
+  { path: 'admin/products', redirectTo: '/products', pathMatch: 'full' },
+  { path: 'admin/users', redirectTo: '/products', pathMatch: 'full' },
+  { path: 'admin/categories', redirectTo: '/products', pathMatch: 'full' },
+  { path: 'admin/purchases', redirectTo: '/products', pathMatch: 'full' },
 ];

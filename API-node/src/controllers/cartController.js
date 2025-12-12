@@ -22,8 +22,8 @@ async function getCartById(req, res, next) {
 async function getCartByUser(req, res, next) {
   const userId = req.params.id;
   if (!isObjectId(userId)) {
-  return res.status(400).json({ error: 'Invalid userId' });
-}
+    return res.status(400).json({ error: 'Invalid userId' });
+  }
   try {
     const userId = req.params.id;
     const cart = await Cart.findOne({ user: userId }).populate('user', '-hashPassword').populate('products.product');
@@ -100,6 +100,7 @@ async function deleteCart(req, res, next) {
 }
 
 // Agregar producto — soporta usuario (token) o invitado (anonymousId)
+// quantity puede ser negativo para decrementar
 async function addProductToCart(req, res, next) {
   try {
     const authUserId = req.user?.userId; // del token si viene
@@ -107,8 +108,9 @@ async function addProductToCart(req, res, next) {
     const { anonymousId, productId } = req.body;
     const quantity = parseInt(req.body.quantity ?? 1, 10);
 
-    if ((!userId && !anonymousId) || !productId || quantity < 1) {
-      return res.status(400).json({ error: 'Provide userId or anonymousId, productId and quantity >= 1' });
+    // Validación: userId o anonymousId, productId requeridos, quantity != 0
+    if ((!userId && !anonymousId) || !productId || quantity === 0) {
+      return res.status(400).json({ error: 'Provide userId or anonymousId, productId and quantity != 0' });
     }
 
     if (userId && !isObjectId(userId)) {
@@ -129,10 +131,19 @@ async function addProductToCart(req, res, next) {
     }
 
     const idx = cart.products.findIndex(it => it.product.toString() === productId);
+
     if (idx >= 0) {
+      // Producto ya existe en carrito
       const desired = cart.products[idx].quantity + quantity;
-      cart.products[idx].quantity = clampByMaxPerOrder(desired, product.maxPerOrder);
-    } else {
+
+      if (desired <= 0) {
+        // Si la cantidad llega a 0 o menos, eliminar el producto del carrito
+        cart.products.splice(idx, 1);
+      } else {
+        cart.products[idx].quantity = clampByMaxPerOrder(desired, product.maxPerOrder);
+      }
+    } else if (quantity > 0) {
+      // Solo agregar si la cantidad es positiva
       cart.products.push({ product: productId, quantity: clampByMaxPerOrder(quantity, product.maxPerOrder) });
     }
 
@@ -183,6 +194,66 @@ async function mergeCarts(req, res, next) {
   } catch (error) { next(error); }
 }
 
+// @desc    Remove a product from user's cart
+// @route   DELETE /api/cart/remove-product
+// @access  Private (User)
+async function removeProductFromCart(req, res, next) {
+  try {
+    const { userId, productId } = req.body;
+
+    // Buscar y actualizar el carrito
+    const cart = await Cart.findOneAndUpdate(
+      { user: userId },
+      { $pull: { products: { product: productId } } }, // Elimina el producto del array
+      { new: true } // Retorna el carrito actualizado
+    ).populate('products.product'); // Popula los detalles del producto
+
+    if (!cart) {
+      return res.status(404).json({ message: 'Cart not found for this user.' });
+    }
+
+    res.status(200).json(cart);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Clear user's cart
+// @route   DELETE /api/cart/clear-cart
+// @access  Private (User)
+async function clearUserCart(req, res, next) {
+  try {
+    const { userId } = req.body; // Se espera que el userId venga en el body para DELETE
+
+    // Validar que userId existe y es un ObjectId válido
+    if (!userId) {
+      return res.status(400).json({ error: 'userId is required' });
+    }
+    if (!isObjectId(userId)) {
+      return res.status(400).json({ error: 'Invalid userId format' });
+    }
+
+    console.log('clearUserCart called with userId:', userId);
+
+    const cart = await Cart.findOneAndUpdate(
+      { user: userId },
+      { $set: { products: [] } }, // Establece el array de productos a vacío
+      { new: true }
+    );
+
+    if (!cart) {
+      // Si no existe carrito, crear uno vacío
+      const newCart = await Cart.create({ user: userId, products: [] });
+      return res.status(200).json(newCart);
+    }
+
+    res.status(200).json(cart);
+  } catch (error) {
+    console.error('Error in clearUserCart:', error);
+    next(error);
+  }
+};
+
 export {
   getCarts,
   getCartById,
@@ -193,4 +264,6 @@ export {
   deleteCart,
   addProductToCart,
   mergeCarts,
+  removeProductFromCart,
+  clearUserCart,
 };

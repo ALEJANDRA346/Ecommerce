@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
@@ -11,8 +11,11 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  // 👇 EL MÉTODO QUE FALTA
+  // 👇 MEJORADO: endpoint /orders (POST), validación userId
   createOrder(payload: any): Observable<any> {
+    if (!payload.user || payload.user === '') {
+      return throwError(() => new Error('Usuario no autenticado'));
+    }
     return this.http.post(this.baseUrl, payload);
   }
 

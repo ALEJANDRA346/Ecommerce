@@ -1,43 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../../core/types/Products';
-import { ProductsService } from '../../core/services/products/products.service';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
+import { ProductsService } from '../../core/services/products/products.service';
+import { CartService } from '../../core/services/cart/cart.service';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CommonModule],
   templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.css'
+  styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent implements OnInit{
-  product: Product | null = null;
+export class ProductDetailComponent {
 
-  constructor(private productService: ProductsService, private route: ActivatedRoute){}
+  private route = inject(ActivatedRoute);
+  private productsService = inject(ProductsService);
+  private cartService = inject(CartService);
+
+  product: any = null;
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe({
-      next:(params)=>{
-        console.log(params)
-        const id = params.get('id');
-        if (!id) {
-          return
-        }
-        this.productService.getProductByID(id).subscribe({
-          next:(product)=>{
-            this.product = product;
-            console.log(product)
-          },
-          error: (error)=>{
-            this.product = null;
-          }
-        });
-      }
-    })
-    // this.productService.getProductByID();
+    const id = this.route.snapshot.params['id'];
+    this.productsService.getProductByID(id).subscribe({
+      next: (res: any) => this.product = res,
+      error: (err: any) => console.error(err),
+    });
   }
-  
 
+  getImage(p: any): string {
+    return p?.imagesUrl?.length
+      ? p.imagesUrl[0]
+      : 'https://via.placeholder.com/600?text=No+image';
+  }
 
+  addToCart() {
+    this.cartService.addToCart(this.product._id, 1).subscribe();
+  }
 }

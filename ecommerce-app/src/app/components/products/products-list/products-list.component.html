@@ -1,22 +1,34 @@
-<h2 class="text-2xl font-bold text-center mt-5">Productos</h2>
+<h2 class="text-3xl text-slate-800 gap-3 text-center mt-5 font-semibold mb-3">
+    Productos
+</h2>
 
 <!-- Error -->
-<div *ngIf="hasError" class="text-center text-red-600 mt-4">
-    Error al cargar productos.
+<div *ngIf="hasError" class="text-center text-red-600 my-4">
+    Ocurrió un error al cargar los productos.
+    <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded" (click)="retryLoadProducts()">
+        Reintentar
+    </button>
 </div>
 
-<!-- Loading -->
-<div *ngIf="isLoading" class="text-center mt-4">
-    Cargando productos...
+<!-- Skeletons mientras carga -->
+<div *ngIf="isLoading && !productResponse"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-10 max-w-5xl mx-auto">
+    <app-placeholder *ngFor="let _ of skeletonArray"></app-placeholder>
 </div>
 
-<!-- Mostrar JSON CRUDO para ver qué viene -->
-<pre *ngIf="productResponse">
-{{ productResponse | json }}
-</pre>
+<!-- GRID: Cards de productos -->
+<div *ngIf="productResponse?.products as products"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-10 max-w-5xl mx-auto">
+    <app-products-card *ngFor="let product of products" [product]="product"></app-products-card>
+</div>
 
-<!-- Grid real -->
-<div *ngIf="productResponse && productResponse.products"
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 my-6 max-w-5xl mx-auto">
-    <app-products-card *ngFor="let product of productResponse.products" [product]="product"></app-products-card>
+<!-- Mensaje si viene vacío -->
+<div *ngIf="productResponse && productResponse.products?.length === 0" class="text-center my-10">
+    No hay productos disponibles.
+</div>
+
+<!-- Paginador -->
+<div class="w-full flex justify-center my-4" *ngIf="productResponse?.pagination as p">
+    <mat-paginator [length]="p.totalResults" [pageSize]="16" [pageSizeOptions]="[16, 32, 64]"
+        (page)="onPageChange($event)"></mat-paginator>
 </div>
